@@ -94,15 +94,48 @@ Tomato, good quality, 6 h before loading, 32 °C outside, 3 h driving, 2 h waiti
 Start: 9 × 0.85 = 7.65 days → remaining **5.8 days** → 🟢 supermarkets / distant governorates.
 In the shade the checkpoint would be 36 °C (rate 4.33, 0.36 days) → **6.0 days**.
 
-## 6. Allocation (FEFO)
+## 6. Allocation (FEFO, by product and quantity)
 
 See [`js/allocation.js`](../js/allocation.js).
 
-1. Sort batches by remaining days, ascending (First Expired, First Out).
-2. Assign each batch to the customer with the **longest** storage need it can still satisfy (`remaining_days ≥ need`).
-3. If none fit: sell today at the central market / at a discount.
+- **Stock batch:** product, quantity (kg), remaining days.
+- **Customer order:** customer, product, quantity (kg), storage need (days the customer keeps produce before selling it). A customer ordering two products is two order rows.
 
-The "without allocation" baseline assumes batches are dispatched blindly in arrival order, rotating through the customer list, and counts how many land at a customer whose storage period is longer than the batch's remaining life.
+A batch can serve an order only if it is **the same product** and `remaining_days ≥ need`.
+
+1. Sort batches by remaining days, ascending (First Expired, First Out).
+2. For each batch, go through same-product orders it can satisfy, **longest storage need first**, and fill their remaining kg. A batch can be split across several orders.
+3. Leftover kg of a batch: fewer than 2 days left → sell today at the central market / at a discount; otherwise → extra stock, offer it to other customers.
+4. Orders that cannot be fully filled are reported as shortfalls.
+
+**Baseline ("without Imdad"):** orders are filled in list order from same-product stock in arrival order, without knowing remaining life. We count the kg that would reach a customer who stores it longer than its remaining life (likely returns).
+
+### Sample walk-through
+
+| Stock | kg | Days left |
+|---|---|---|
+| Tomato (batch 1) | 300 | 5.8 |
+| Tomato (batch 2) | 200 | 1.5 |
+| Cucumber (batch 3) | 150 | 3.4 |
+| Cucumber (batch 4) | 100 | 0.8 |
+
+| Order | Product | kg | Stores (days) |
+|---|---|---|---|
+| Restaurant | Tomato | 150 | 1 |
+| Grocery | Tomato | 100 | 3 |
+| Grocery | Cucumber | 80 | 3 |
+| Supermarket | Tomato | 250 | 5 |
+| Supermarket | Cucumber | 100 | 5 |
+
+Result (FEFO order):
+1. Cucumber 0.8 d: no order fits → 100 kg sell today.
+2. Tomato 1.5 d: Restaurant 150 kg; 50 kg left → sell today.
+3. Cucumber 3.4 d: Grocery 80 kg; 70 kg left → extra stock.
+4. Tomato 5.8 d: Supermarket 250 kg, Grocery 50 kg.
+
+Shortfalls: Grocery tomato 50 kg; Supermarket cucumber 100 kg (no cucumber batch lasts 5 days).
+
+Baseline: **300 kg** of 680 kg would reach customers who store it longer than its remaining life (200 kg of 1.5-day tomato and 100 kg of short-life cucumber to the supermarket). With Imdad: **0 kg**.
 
 ## 7. Limitations
 

@@ -468,3 +468,48 @@ input[type="number"] { direction: ltr; text-align: start; }
 .step-highlight .step-num { color: var(--primary); }
 .step .tag { margin-bottom: 8px; }
 .nowrap { white-space: nowrap; }
+
+/* ---------- Allocation: stock & orders with quantities ---------- */
+.edit-row-stock { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 42px; }
+.edit-row-order { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, .8fr) 42px; }
+.edit-row-order .cell-name { grid-column: 1 / -1; }
+.edit-row-order.edit-head .cell-name { display: none; }
+.edit-row-order:not(.edit-head) { padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.edit-row-order:not(.edit-head):last-child { border-bottom: 0; }
+.edit-row-order.edit-head { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, .8fr) 42px; }
+@media (min-width: 1100px) {
+  .edit-row-order, .edit-row-order.edit-head { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, .9fr) minmax(0, .8fr) 42px; }
+  .edit-row-order .cell-name { grid-column: auto; }
+  .edit-row-order.edit-head .cell-name { display: block; }
+  .edit-row-order:not(.edit-head) { padding-bottom: 0; border-bottom: 0; }
+}
+/* Orders header without the name column on narrow screens: shift labels to match inputs */
+.edit-row-order.edit-head > span:nth-child(5) { display: none; }
+@media (min-width: 1100px) { .edit-row-order.edit-head > span:nth-child(5) { display: block; } }
+
+.cell-kg { white-space: nowrap; font-weight: 700; }
+.alloc-table tr.row-extra td:first-child { border-inline-start-color: var(--line-strong); }
+.send-extra { font-weight: 700; color: var(--muted); }
+.alloc-shortfalls:empty { display: none; }
+.alloc-shortfalls {
+  margin: 0 0 12px; padding: 12px 14px; border-radius: var(--radius-sm);
+  background: var(--gold-tint); border-inline-start: 3px solid var(--gold); color: #5c4806; font-size: .92rem;
+}
+.alloc-shortfalls h4 { margin: 0 0 4px; font-size: .9rem; }
+.alloc-shortfalls ul { margin: 0; padding-inline-start: 18px; }
+@media (max-width: 600px) {
+  /* Stock rows: product on its own line, then kg / days / delete */
+  .edit-row-stock { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 42px; }
+  .edit-row-stock > select { grid-column: 1 / -1; }
+  .edit-row-stock.edit-head > span:first-child { display: none; }
+  .edit-row-stock:not(.edit-head) { padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .edit-row-stock:not(.edit-head):last-child { border-bottom: 0; }
+  .edit-row input[type="number"] { padding-inline: 10px; }
+  /* Results table: drop the # and spare columns to make room */
+  .alloc-table th:first-child, .alloc-table td:first-child,
+  .alloc-table th:last-child, .alloc-table td:last-child { display: none; }
+  .alloc-table td:nth-child(2) { border-inline-start: 3px solid var(--green); }
+  .alloc-table tr.row-yellow td:nth-child(2) { border-inline-start-color: var(--yellow); }
+  .alloc-table tr.row-red td:nth-child(2) { border-inline-start-color: var(--red); }
+  .alloc-table tr.row-extra td:nth-child(2) { border-inline-start-color: var(--line-strong); }
+}

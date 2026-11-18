@@ -76,7 +76,7 @@ Inspired by Zest Fresh (USA), which showed that batches harvested the same day c
 ## MVP features
 
 - 🧮 **Batch shelf-life calculator**: product, quality, hours before loading, outside temperature, driving hours, hours waited at checkpoints, sun/shade, truck type → remaining days, 🔴🟡🟢 category, recommended customer, SVG chart of shelf life consumed per stage, and a "what if it had waited in the shade" comparison.
-- 📦 **FEFO batch allocation**: editable batches and customers; each batch goes to the customer with the longest storage need it can still satisfy, plus a summary of mismatches avoided.
+- 📦 **FEFO batch allocation by product and quantity**: editable stock (product, kg, days left) and customer orders (product, kg, storage days). Each batch goes only to orders for the same product, to the customer with the longest storage need it can still satisfy, split by kg. Shows leftovers (sell today / extra stock), unfilled orders, and the kg of likely returns avoided (300 kg in the sample).
 - 💬 **Live WhatsApp preview**: a phone mock-up showing the message for the calculator batch, updated live.
 - 🌍 **Bilingual**: Arabic (default, RTL) and English (LTR); the choice is remembered.
 - 📱 **Mobile first**, accessible, no dependencies, works offline once loaded (except the web font).

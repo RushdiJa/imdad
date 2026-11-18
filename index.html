@@ -310,7 +310,7 @@
       <div class="container">
         <p class="kicker" data-i18n="alloc.kicker"></p>
         <h2 data-i18n="alloc.title"></h2>
-        <p class="section-intro" data-i18n="alloc.intro"></p>
+        <p class="section-intro" data-i18n-html="alloc.intro"></p>
 
         <div class="alloc-grid">
           <div class="card">
@@ -345,7 +345,7 @@
                 <tr>
                   <th scope="col" data-i18n="alloc.col.order"></th>
                   <th scope="col" data-i18n="alloc.col.batch"></th>
-                  <th scope="col" data-i18n="alloc.col.remaining"></th>
+                  <th scope="col" data-i18n="alloc.col.kg"></th>
                   <th scope="col" data-i18n="alloc.col.sendTo"></th>
                   <th scope="col" data-i18n="alloc.col.spare"></th>
                 </tr>
@@ -353,6 +353,7 @@
               <tbody></tbody>
             </table>
           </div>
+          <div class="alloc-shortfalls" id="alloc-shortfalls" aria-live="polite"></div>
           <p class="alloc-summary" id="alloc-summary" aria-live="polite"></p>
           <p class="hint" data-i18n="alloc.baselineNote"></p>
         </div>

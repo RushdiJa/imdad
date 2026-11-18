@@ -1,96 +1,132 @@
 /**
  * Imdad — Batch allocation (FEFO: First Expired, First Out)
  * ------------------------------------------------------------------
- * Goal: send each batch to a customer who will sell it BEFORE it spoils.
+ * Goal: send each batch to a customer who ordered THE SAME PRODUCT and
+ * who will sell it BEFORE it spoils, in the right quantity (kg).
  *
- * Each customer has a "storage need": how many days they typically keep
- * produce before selling it (restaurant ≈ 1 day, grocery ≈ 3, supermarket ≈ 5).
- * A batch fits a customer when remaining_days ≥ need.
+ * Stock batch: { product, kg, days }   days = remaining shelf life
+ * Order:       { customer, product, kg, need }
+ *              need = how many days the customer typically keeps produce
+ *              before selling it (restaurant ≈ 1, grocery ≈ 3, supermarket ≈ 5).
+ *
+ * A batch can serve an order only if:
+ *   - it is the same product, and
+ *   - remaining_days ≥ need (it will still be good when the customer sells it).
  *
  * Algorithm:
  *   1. Sort batches by remaining days, ascending (the ones expiring first go first).
- *   2. For each batch, pick the customer with the LONGEST storage need that the
- *      batch can still satisfy. This keeps the long-life batches for the
- *      customers who really need them (supermarkets, distant governorates)
- *      and pushes short-life batches to fast sellers (restaurants).
- *   3. If no customer fits, recommend: sell today at the central market / discount.
+ *   2. For each batch, look at same-product orders it can satisfy, LONGEST storage
+ *      need first, and fill their remaining kg. A batch may be split across orders.
+ *      Long-life batches are kept for the customers who really need them
+ *      (supermarkets, distant governorates); short-life ones go to fast sellers.
+ *   3. Leftover kg of a batch:
+ *        < 2 days left → sell today at the central market / at a discount
+ *        otherwise     → extra stock, offer it to other customers
+ *   4. Orders that could not be fully filled are reported as shortfalls.
  *
- * Baseline ("without allocation"): the distributor does not know each batch's
- * remaining life, so batches are dispatched blindly in the order they arrived,
- * rotating through the customer list (round-robin). We count how many batches
- * would land at a customer who stores them longer than their remaining life.
+ * Baseline ("without Imdad"): the distributor does not know each batch's
+ * remaining life, so orders are filled in list order from same-product stock
+ * in arrival order. We count the kg that would reach a customer who stores it
+ * longer than its remaining life (i.e. likely returns).
  *
  * All values in the demo are SAMPLE VALUES.
  */
 (function (global) {
   'use strict';
 
-  /** Sample batches (product key + remaining shelf life in days). */
+  /** Below this many remaining days, leftovers should be sold today. */
+  var SELL_TODAY_DAYS = 2;
+
+  /** Sample stock: product key, quantity (kg), remaining shelf life (days). */
   var SAMPLE_BATCHES = [
-    { product: 'tomato', days: 5.8 },
-    { product: 'grapes', days: 3.4 },
-    { product: 'cucumber', days: 1.6 },
-    { product: 'strawberry', days: 0.7 }
+    { product: 'tomato', kg: 300, days: 5.8 },
+    { product: 'tomato', kg: 200, days: 1.5 },
+    { product: 'cucumber', kg: 150, days: 3.4 },
+    { product: 'cucumber', kg: 100, days: 0.8 }
   ];
 
-  /** Sample customers: `type` is a translation key, `need` is storage days. */
-  var SAMPLE_CUSTOMERS = [
-    { type: 'restaurant', need: 1 },
-    { type: 'grocery', need: 3 },
-    { type: 'supermarket', need: 5 }
+  /** Sample orders: `type` is a translation key for the customer name. */
+  var SAMPLE_ORDERS = [
+    { type: 'restaurant', product: 'tomato', kg: 150, need: 1 },
+    { type: 'grocery', product: 'tomato', kg: 100, need: 3 },
+    { type: 'grocery', product: 'cucumber', kg: 80, need: 3 },
+    { type: 'supermarket', product: 'tomato', kg: 250, need: 5 },
+    { type: 'supermarket', product: 'cucumber', kg: 100, need: 5 }
   ];
 
   function num(x) {
     var n = Number(x);
     return isFinite(n) ? n : 0;
   }
+  function round1(x) { return Math.round(x * 10) / 10; }
 
   /**
-   * FEFO allocation.
-   * @param {Array<{id:*, product:string, days:number}>} batches
-   * @param {Array<{id:*, name:string, need:number}>} customers
-   * @returns {Array<{batch:Object, customer:Object|null, slack:number|null}>}
-   *          in FEFO order; customer === null means "sell today / discount".
+   * FEFO allocation with quantities and same-product matching.
+   * @param {Array<{id:*, product:string, kg:number, days:number}>} batches
+   * @param {Array<{id:*, product:string, kg:number, need:number}>} orders
+   * @returns {{
+   *   assignments: Array<{batch:Object, order:Object, kg:number, slack:number}>,
+   *   leftovers:   Array<{batch:Object, kg:number, sellToday:boolean}>,
+   *   shortfalls:  Array<{order:Object, kg:number}>
+   * }}  assignments are in FEFO order.
    */
-  function allocate(batches, customers) {
-    var sortedBatches = batches.slice().sort(function (a, b) { return num(a.days) - num(b.days); });
-    // Customers sorted by storage need, longest first, so the first fit is the best fit.
-    var byNeedDesc = customers.slice().sort(function (a, b) { return num(b.need) - num(a.need); });
+  function allocate(batches, orders) {
+    var open = orders.map(function (o) { return { order: o, left: Math.max(0, num(o.kg)) }; });
+    var sorted = batches.slice().sort(function (a, b) { return num(a.days) - num(b.days); });
+    var assignments = [], leftovers = [];
 
-    return sortedBatches.map(function (batch) {
+    sorted.forEach(function (batch) {
       var days = num(batch.days);
-      var match = null;
-      for (var i = 0; i < byNeedDesc.length; i++) {
-        if (days >= num(byNeedDesc[i].need)) { match = byNeedDesc[i]; break; }
+      var stock = Math.max(0, num(batch.kg));
+
+      // Same product, still good when the customer sells it, longest need first.
+      var fits = open
+        .filter(function (o) { return o.order.product === batch.product && o.left > 0 && days >= num(o.order.need); })
+        .sort(function (a, b) { return num(b.order.need) - num(a.order.need); });
+
+      for (var i = 0; i < fits.length && stock > 0; i++) {
+        var take = Math.min(stock, fits[i].left);
+        fits[i].left -= take;
+        stock -= take;
+        assignments.push({ batch: batch, order: fits[i].order, kg: take, slack: round1(days - num(fits[i].order.need)) });
       }
-      return {
-        batch: batch,
-        customer: match,
-        // slack = spare days after the customer's storage period
-        slack: match ? Math.round((days - num(match.need)) * 10) / 10 : null
-      };
+      if (stock > 0) leftovers.push({ batch: batch, kg: stock, sellToday: days < SELL_TODAY_DAYS });
     });
+
+    var shortfalls = open
+      .filter(function (o) { return o.left > 0; })
+      .map(function (o) { return { order: o.order, kg: o.left }; });
+
+    return { assignments: assignments, leftovers: leftovers, shortfalls: shortfalls };
   }
 
   /**
-   * Baseline without allocation: round-robin in arrival order.
-   * @returns {{assignments: Array, mismatches: number}}
+   * Baseline without remaining-life information: fill orders in list order
+   * from same-product stock in arrival order.
+   * @returns {{badKg:number, totalKg:number}} kg that would reach a customer
+   *          who stores it longer than its remaining life, out of kg delivered.
    */
-  function naiveBaseline(batches, customers) {
-    if (!customers.length) return { assignments: [], mismatches: 0 };
-    var mismatches = 0;
-    var assignments = batches.map(function (batch, i) {
-      var c = customers[i % customers.length];
-      var bad = num(batch.days) < num(c.need);
-      if (bad) mismatches++;
-      return { batch: batch, customer: c, mismatch: bad };
+  function naiveBaseline(batches, orders) {
+    var stock = batches.map(function (b) { return { batch: b, left: Math.max(0, num(b.kg)) }; });
+    var badKg = 0, totalKg = 0;
+    orders.forEach(function (o) {
+      var need = Math.max(0, num(o.kg));
+      stock.forEach(function (s) {
+        if (need <= 0 || s.left <= 0 || s.batch.product !== o.product) return;
+        var take = Math.min(need, s.left);
+        s.left -= take;
+        need -= take;
+        totalKg += take;
+        if (num(s.batch.days) < num(o.need)) badKg += take;
+      });
     });
-    return { assignments: assignments, mismatches: mismatches };
+    return { badKg: badKg, totalKg: totalKg };
   }
 
   global.ImdadAllocation = {
+    SELL_TODAY_DAYS: SELL_TODAY_DAYS,
     SAMPLE_BATCHES: SAMPLE_BATCHES,
-    SAMPLE_CUSTOMERS: SAMPLE_CUSTOMERS,
+    SAMPLE_ORDERS: SAMPLE_ORDERS,
     allocate: allocate,
     naiveBaseline: naiveBaseline
   };

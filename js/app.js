@@ -167,22 +167,23 @@
   }
 
   // =================================================================
-  // Demo 2: allocation
+  // Demo 2: allocation (stock batches → customer orders, same product, kg)
   // =================================================================
   var nextId = 1;
-  var batches = [];
-  var customers = [];
+  var batches = [];   // stock: { id, product, kg, days }
+  var orders = [];    // orders: { id, type|name, product, kg, need }
 
   function loadSamples() {
-    batches = Alloc.SAMPLE_BATCHES.map(function (b) { return { id: nextId++, product: b.product, days: b.days }; });
-    customers = Alloc.SAMPLE_CUSTOMERS.map(function (c) { return { id: nextId++, type: c.type, need: c.need }; });
+    batches = Alloc.SAMPLE_BATCHES.map(function (b) { return { id: nextId++, product: b.product, kg: b.kg, days: b.days }; });
+    orders = Alloc.SAMPLE_ORDERS.map(function (o) { return { id: nextId++, type: o.type, product: o.product, kg: o.kg, need: o.need }; });
   }
 
-  function customerName(c) { return c.name != null ? c.name : t('cust.' + c.type); }
+  function customerName(o) { return o.name != null ? o.name : t('cust.' + o.type); }
+  function productLabel(p) { return Model.PRODUCTS[p].emoji + ' ' + t('product.' + p); }
   function batchLabel(b) {
-    var idx = batches.indexOf(b) + 1;
-    return Model.PRODUCTS[b.product].emoji + ' ' + t('product.' + b.product) + ' · ' + t('alloc.batchN', { n: idx });
+    return productLabel(b.product) + ' · ' + t('alloc.batchN', { n: batches.indexOf(b) + 1 });
   }
+  function kgLabel(kg) { return t('alloc.kgShort', { kg: Math.round(kg) }); }
 
   function productOptions(selected) {
     return Object.keys(Model.PRODUCTS).map(function (k) {
@@ -191,28 +192,41 @@
     }).join('');
   }
 
+  function numInput(field, value, label, step, max) {
+    return '<input data-field="' + field + '" type="number" inputmode="decimal" min="0" max="' + max + '" step="' + step +
+      '" value="' + value + '" aria-label="' + escapeHtml(label) + '">';
+  }
+  function delButton(action, label) {
+    return '<button type="button" class="icon-btn" data-action="' + action + '" aria-label="' + escapeHtml(label) + '">✕</button>';
+  }
+
   /** Rebuild the editable lists (on add/delete/language change only, to keep input focus). */
   function renderLists() {
     $('#batch-list').innerHTML =
-      '<div class="edit-row edit-head"><span>' + escapeHtml(t('alloc.product')) + '</span><span>' +
-      escapeHtml(t('alloc.days')) + '</span><span></span></div>' +
+      '<div class="edit-row edit-row-stock edit-head"><span>' + escapeHtml(t('alloc.product')) + '</span><span>' +
+      escapeHtml(t('alloc.kg')) + '</span><span>' + escapeHtml(t('alloc.days')) + '</span><span></span></div>' +
       batches.map(function (b, i) {
-        return '<div class="edit-row" data-id="' + b.id + '">' +
-          '<select data-field="product" aria-label="' + escapeHtml(t('alloc.product') + ' ' + (i + 1)) + '">' + productOptions(b.product) + '</select>' +
-          '<input data-field="days" type="number" inputmode="decimal" min="0" max="30" step="0.1" value="' + b.days + '" aria-label="' + escapeHtml(t('alloc.days') + ' ' + (i + 1)) + '">' +
-          '<button type="button" class="icon-btn" data-action="del-batch" aria-label="' + escapeHtml(t('alloc.deleteBatch', { n: i + 1 })) + '">✕</button>' +
+        var n = i + 1;
+        return '<div class="edit-row edit-row-stock" data-id="' + b.id + '">' +
+          '<select data-field="product" aria-label="' + escapeHtml(t('alloc.product') + ' ' + n) + '">' + productOptions(b.product) + '</select>' +
+          numInput('kg', b.kg, t('alloc.kg') + ' ' + n, 10, 100000) +
+          numInput('days', b.days, t('alloc.days') + ' ' + n, 0.1, 30) +
+          delButton('del-batch', t('alloc.deleteBatch', { n: n })) +
           '</div>';
       }).join('');
 
     $('#customer-list').innerHTML =
-      '<div class="edit-row edit-head"><span>' + escapeHtml(t('alloc.customerName')) + '</span><span>' +
+      '<div class="edit-row edit-row-order edit-head"><span class="cell-name">' + escapeHtml(t('alloc.customerName')) + '</span><span>' +
+      escapeHtml(t('alloc.product')) + '</span><span>' + escapeHtml(t('alloc.kg')) + '</span><span>' +
       escapeHtml(t('alloc.need')) + '</span><span></span></div>' +
-      customers.map(function (c) {
-        var name = customerName(c);
-        return '<div class="edit-row" data-id="' + c.id + '">' +
-          '<input data-field="name" type="text" maxlength="40" value="' + escapeHtml(name) + '" aria-label="' + escapeHtml(t('alloc.customerName')) + '">' +
-          '<input data-field="need" type="number" inputmode="decimal" min="0" max="30" step="0.5" value="' + c.need + '" aria-label="' + escapeHtml(t('alloc.need')) + '">' +
-          '<button type="button" class="icon-btn" data-action="del-customer" aria-label="' + escapeHtml(t('alloc.deleteCustomer', { name: name })) + '">✕</button>' +
+      orders.map(function (o) {
+        var name = customerName(o);
+        return '<div class="edit-row edit-row-order" data-id="' + o.id + '">' +
+          '<input class="cell-name" data-field="name" type="text" maxlength="40" value="' + escapeHtml(name) + '" aria-label="' + escapeHtml(t('alloc.customerName')) + '">' +
+          '<select data-field="product" aria-label="' + escapeHtml(t('alloc.product') + ' · ' + name) + '">' + productOptions(o.product) + '</select>' +
+          numInput('kg', o.kg, t('alloc.kg') + ' · ' + name, 10, 100000) +
+          numInput('need', o.need, t('alloc.need') + ' · ' + name, 0.5, 30) +
+          delButton('del-customer', t('alloc.deleteCustomer', { name: name })) +
           '</div>';
       }).join('');
   }
@@ -220,34 +234,69 @@
   function renderAllocation() {
     var tbody = $('#alloc-table tbody');
     var summary = $('#alloc-summary');
-    var valid = batches.filter(function (b) { return isFinite(parseFloat(b.days)); });
+    var shortBox = $('#alloc-shortfalls');
+    var valid = batches.filter(function (b) { return isFinite(parseFloat(b.days)) && parseFloat(b.kg) > 0; });
+    var validOrders = orders.filter(function (o) { return parseFloat(o.kg) > 0; });
 
-    if (!valid.length || !customers.length) {
+    if (!valid.length || !validOrders.length) {
       tbody.innerHTML = '<tr><td colspan="5" class="empty">' + escapeHtml(t('alloc.empty')) + '</td></tr>';
       summary.textContent = '';
+      shortBox.innerHTML = '';
       return;
     }
 
-    var result = Alloc.allocate(valid, customers);
-    tbody.innerHTML = result.map(function (row, i) {
-      var days = parseFloat(row.batch.days);
+    var result = Alloc.allocate(valid, validOrders);
+
+    // One table: assignments and leftovers, grouped by batch in FEFO order.
+    var rows = [];
+    var fefo = valid.slice().sort(function (a, b) { return parseFloat(a.days) - parseFloat(b.days); });
+    fefo.forEach(function (b) {
+      result.assignments.filter(function (a) { return a.batch === b; }).forEach(function (a) { rows.push({ kind: 'send', a: a }); });
+      result.leftovers.filter(function (l) { return l.batch === b; }).forEach(function (l) { rows.push({ kind: 'left', l: l }); });
+    });
+
+    tbody.innerHTML = rows.map(function (row, i) {
+      var b = row.kind === 'send' ? row.a.batch : row.l.batch;
+      var days = parseFloat(b.days);
       var cat = Model.categorize(days);
-      var sendTo = row.customer
-        ? '<span class="send-ok">' + escapeHtml(customerName(row.customer)) + '</span>'
-        : '<span class="send-today">' + escapeHtml(t('alloc.sellToday')) + '</span>';
-      var spare = row.slack != null ? '+' + fmt(row.slack) : '–';
-      return '<tr class="row-' + (row.customer ? cat : 'red') + '">' +
+      var kg = row.kind === 'send' ? row.a.kg : row.l.kg;
+      var sendTo, spare, rowClass;
+      if (row.kind === 'send') {
+        sendTo = '<span class="send-ok">' + escapeHtml(customerName(row.a.order)) + '</span>' +
+          ' <span class="hint">' + escapeHtml(t('alloc.storesFor', { d: row.a.order.need })) + '</span>';
+        spare = '+' + fmt(row.a.slack);
+        rowClass = 'row-' + cat;
+      } else if (row.l.sellToday) {
+        sendTo = '<span class="send-today">' + escapeHtml(t('alloc.sellToday')) + '</span>';
+        spare = '–';
+        rowClass = 'row-red';
+      } else {
+        sendTo = '<span class="send-extra">' + escapeHtml(t('alloc.extraStock')) + '</span>';
+        spare = '–';
+        rowClass = 'row-extra';
+      }
+      return '<tr class="' + rowClass + '">' +
         '<td>' + (i + 1) + '</td>' +
-        '<td>' + escapeHtml(batchLabel(row.batch)) + '</td>' +
-        '<td><span class="dot dot-' + cat + '"></span> ' + escapeHtml(t('alloc.daysShort', { d: fmt(days) })) + '</td>' +
+        '<td>' + escapeHtml(batchLabel(b)) + '<br><span class="hint"><span class="dot dot-' + cat + '"></span> ' +
+          escapeHtml(t('alloc.daysLeft', { d: fmt(days) })) + '</span></td>' +
+        '<td class="cell-kg">' + escapeHtml(kgLabel(kg)) + '</td>' +
         '<td>' + sendTo + '</td>' +
         '<td dir="ltr">' + spare + '</td>' +
         '</tr>';
     }).join('');
 
-    var base = Alloc.naiveBaseline(valid, customers);
-    summary.innerHTML = base.mismatches > 0
-      ? t('alloc.summary', { x: base.mismatches, n: valid.length })
+    shortBox.innerHTML = result.shortfalls.length
+      ? '<h4>' + escapeHtml(t('alloc.shortfalls')) + '</h4><ul>' + result.shortfalls.map(function (s) {
+          return '<li>' + escapeHtml(t('alloc.shortfallItem', {
+            customer: customerName(s.order), product: productLabel(s.order.product),
+            kg: Math.round(s.kg), d: s.order.need
+          })) + '</li>';
+        }).join('') + '</ul>'
+      : '';
+
+    var base = Alloc.naiveBaseline(valid, validOrders);
+    summary.innerHTML = base.badKg > 0
+      ? t('alloc.summary', { x: Math.round(base.badKg), n: Math.round(base.totalKg) })
       : escapeHtml(t('alloc.summaryNone'));
   }
 
@@ -261,12 +310,12 @@
     if (!row || !row.dataset.id) return;
     var id = Number(row.dataset.id);
     var field = e.target.dataset.field;
-    var b = findById(batches, id);
-    var c = findById(customers, id);
-    if (b && field === 'product') b.product = e.target.value;
-    if (b && field === 'days') b.days = e.target.value === '' ? NaN : parseFloat(e.target.value);
-    if (c && field === 'name') { c.name = e.target.value; delete c.type; }
-    if (c && field === 'need') c.need = parseFloat(e.target.value) || 0;
+    var item = findById(batches, id) || findById(orders, id);
+    if (!item || !field) return;
+    if (field === 'product') item.product = e.target.value;
+    else if (field === 'name') { item.name = e.target.value; delete item.type; }
+    else if (field === 'days') item.days = e.target.value === '' ? NaN : parseFloat(e.target.value);
+    else item[field] = parseFloat(e.target.value) || 0;   // kg, need
     renderAllocation();
   }
 
@@ -275,7 +324,7 @@
     if (!btn) return;
     var id = Number(btn.closest('.edit-row').dataset.id);
     if (btn.dataset.action === 'del-batch') batches = batches.filter(function (b) { return b.id !== id; });
-    if (btn.dataset.action === 'del-customer') customers = customers.filter(function (c) { return c.id !== id; });
+    if (btn.dataset.action === 'del-customer') orders = orders.filter(function (o) { return o.id !== id; });
     renderLists();
     renderAllocation();
   }
@@ -287,20 +336,20 @@
   });
 
   $('#add-batch').addEventListener('click', function () {
-    batches.push({ id: nextId++, product: 'tomato', days: 3 });
+    batches.push({ id: nextId++, product: 'tomato', kg: 100, days: 3 });
     renderLists(); renderAllocation();
     var inputs = document.querySelectorAll('#batch-list select');
     if (inputs.length) inputs[inputs.length - 1].focus();
   });
   $('#add-customer').addEventListener('click', function () {
-    customers.push({ id: nextId++, name: t('cust.new'), need: 2 });
+    orders.push({ id: nextId++, name: t('cust.new'), product: 'tomato', kg: 50, need: 2 });
     renderLists(); renderAllocation();
     var inputs = document.querySelectorAll('#customer-list input[data-field="name"]');
     if (inputs.length) { inputs[inputs.length - 1].focus(); inputs[inputs.length - 1].select(); }
   });
   $('#add-from-demo').addEventListener('click', function () {
     if (!lastResult) return;
-    batches.push({ id: nextId++, product: lastInput.product, days: lastResult.remainingDays });
+    batches.push({ id: nextId++, product: lastInput.product, kg: 100, days: lastResult.remainingDays });
     renderLists(); renderAllocation();
   });
   $('#reset-alloc').addEventListener('click', function () {
