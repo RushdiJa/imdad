@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>إمداد | اعرف كم باقي من عمر كل دفعة</title>
+  <meta name="description" data-i18n-attr="content:meta.description" content="إمداد: حسّاس يرافق كل شحنة ونموذج تعلّم آلي يقدّر العمر المتبقي لكل دفعة خضار وفواكه ويوصي بالزبون المناسب عبر واتساب. نموذج أولي — تحدي التجارة الذكية 2026.">
+  <meta name="theme-color" content="#1f9d55">
+  <link rel="canonical" href="https://rushdija.github.io/amdad/">
+
+  <!-- Open Graph / social previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Amdad | إمداد">
+  <meta property="og:title" content="Amdad (إمداد): Know how much life each batch has left, and where to send it.">
+  <meta property="og:description" content="Shelf-life tracking and smart allocation for fresh produce distributors in Palestine. اعرف كم باقي من عمر كل دفعة، ولوين تبعتها.">
+  <meta property="og:url" content="https://rushdija.github.io/amdad/">
+  <meta property="og:image" content="https://rushdija.github.io/amdad/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Amdad (إمداد): Know how much life each batch has left">
+  <meta name="twitter:description" content="Shelf-life tracking and smart allocation for fresh produce distributors in Palestine.">
+  <meta name="twitter:image" content="https://rushdija.github.io/amdad/assets/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">تخطَّ إلى المحتوى</a>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Amdad">
+        <img src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand-name" data-i18n="brand">إمداد</span>
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="Main">
+        <a href="#problem" data-i18n="nav.problem">المشكلة</a>
+        <a href="#how" data-i18n="nav.how">كيف يعمل</a>
+        <a href="#demo" data-i18n="nav.demo">الحاسبة</a>
+        <a href="#allocation" data-i18n="nav.allocation">التوزيع</a>
+        <a href="#whatsapp" data-i18n="nav.whatsapp">واتساب</a>
+        <a href="#team" data-i18n="nav.team">الفريق</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="lang-toggle" id="lang-toggle" data-i18n="lang.toggle" data-i18n-attr="aria-label:lang.toggleLabel" lang="en">English</button>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="main-nav" data-i18n-attr="aria-label:nav.menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="badge" data-i18n="hero.badge">تحدي التجارة الذكية 2026 · فلسطين</p>
+          <h1 data-i18n="hero.tagline">اعرف كم باقي من عمر كل دفعة، ولوين تبعتها.</h1>
+          <p class="lead" data-i18n="hero.subtitle"></p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#demo" data-i18n="hero.cta">جرّب العرض التجريبي</a>
+            <a class="btn btn-ghost" href="#how" data-i18n="hero.ctaSecondary">كيف يعمل؟</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-card">
+            <div class="hero-card-top">
+              <span class="hero-emoji">🍅</span>
+              <span data-i18n="hero.card.title">دفعة بندورة · الحمرا</span>
+            </div>
+            <div class="hero-card-label" data-i18n="hero.card.remaining">العمر المتبقي</div>
+            <div class="hero-card-value"><span class="num">5.8</span> <span data-i18n="hero.card.days">يوم</span> <span class="dot dot-green"></span></div>
+            <div class="hero-meter"><span style="width:76%"></span></div>
+            <div class="hero-card-send" data-i18n="hero.card.send"></div>
+            <div class="hero-card-note" data-i18n="hero.card.note"></div>
+          </div>
+          <div class="hero-blob"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Problem ============ -->
+    <section class="section" id="problem">
+      <div class="container">
+        <p class="kicker" data-i18n="problem.kicker"></p>
+        <h2 data-i18n="problem.title"></h2>
+        <p class="section-intro" data-i18n="problem.intro"></p>
+        <div class="cards-3">
+          <article class="card problem-card">
+            <div class="icon icon-orange" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/><path d="M11.5 17.5v-6"/></svg>
+            </div>
+            <h3 data-i18n="problem.c1.title"></h3>
+            <p data-i18n="problem.c1.text"></p>
+          </article>
+          <article class="card problem-card">
+            <div class="icon icon-orange" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>
+            </div>
+            <h3 data-i18n="problem.c2.title"></h3>
+            <p data-i18n="problem.c2.text"></p>
+          </article>
+          <article class="card problem-card">
+            <div class="icon icon-orange" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+            </div>
+            <h3 data-i18n="problem.c3.title"></h3>
+            <p data-i18n="problem.c3.text"></p>
+          </article>
+        </div>
+        <aside class="sources" aria-labelledby="sources-title">
+          <h3 id="sources-title" data-i18n="problem.sources"></h3>
+          <ul>
+            <li data-i18n-html="problem.f1"></li>
+            <li data-i18n-html="problem.f2"></li>
+            <li data-i18n-html="problem.f3"></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ How it works ============ -->
+    <section class="section section-tint" id="how">
+      <div class="container">
+        <p class="kicker" data-i18n="how.kicker"></p>
+        <h2 data-i18n="how.title"></h2>
+        <p class="section-intro" data-i18n="how.intro"></p>
+        <ol class="steps">
+          <li class="step">
+            <div class="icon icon-green" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 7h4M12 11v5"/><circle cx="12" cy="17" r="1.5"/></svg>
+            </div>
+            <span class="step-num">1</span>
+            <h3 data-i18n="how.s1.title"></h3>
+            <p data-i18n="how.s1.text"></p>
+          </li>
+          <li class="step">
+            <div class="icon icon-green" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg>
+            </div>
+            <span class="step-num">2</span>
+            <h3 data-i18n="how.s2.title"></h3>
+            <p data-i18n="how.s2.text"></p>
+          </li>
+          <li class="step">
+            <div class="icon icon-green" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-4.4A8.4 8.4 0 1 1 20 11.5z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
+            </div>
+            <span class="step-num">3</span>
+            <h3 data-i18n="how.s3.title"></h3>
+            <p data-i18n="how.s3.text"></p>
+          </li>
+        </ol>
+        <p class="inspired" data-i18n="how.inspired"></p>
+      </div>
+    </section>
+
+    <!-- ============ Demo 1: calculator ============ -->
+    <section class="section" id="demo">
+      <div class="container">
+        <p class="kicker" data-i18n="calc.kicker"></p>
+        <h2 data-i18n="calc.title"></h2>
+        <p class="section-intro" data-i18n="calc.intro"></p>
+
+        <div class="calc">
+          <form class="card calc-form" id="calc-form" novalidate>
+            <div class="field">
+              <label for="f-product" data-i18n="calc.product"></label>
+              <select id="f-product" name="product">
+                <option value="tomato" data-i18n="product.tomato"></option>
+                <option value="cucumber" data-i18n="product.cucumber"></option>
+                <option value="pepper" data-i18n="product.pepper"></option>
+                <option value="grapes" data-i18n="product.grapes"></option>
+                <option value="lettuce" data-i18n="product.lettuce"></option>
+                <option value="strawberry" data-i18n="product.strawberry"></option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-quality"><span data-i18n="calc.quality"></span> <small class="hint" data-i18n="calc.qualityHint"></small></label>
+              <select id="f-quality" name="quality">
+                <option value="excellent" data-i18n="quality.excellent"></option>
+                <option value="good" selected data-i18n="quality.good"></option>
+                <option value="fair" data-i18n="quality.fair"></option>
+              </select>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-before" data-i18n="calc.hoursBefore"></label>
+                <input id="f-before" name="hoursBeforeLoading" type="number" inputmode="decimal" min="0" max="72" step="0.5" value="6">
+              </div>
+              <div class="field">
+                <label for="f-temp" data-i18n="calc.outsideTemp"></label>
+                <input id="f-temp" name="outsideTemp" type="number" inputmode="decimal" min="-5" max="50" step="1" value="32">
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-driving" data-i18n="calc.drivingHours"></label>
+              <input id="f-driving" name="drivingHours" type="number" inputmode="decimal" min="0" max="48" step="0.5" value="3">
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-checkpoint" data-i18n="calc.checkpoint"></label>
+                <select id="f-checkpoint" name="checkpoint">
+                  <option value="hamra" data-i18n="checkpoint.hamra"></option>
+                  <option value="tayasir" data-i18n="checkpoint.tayasir"></option>
+                  <option value="container" data-i18n="checkpoint.container"></option>
+                  <option value="other" data-i18n="checkpoint.other"></option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-delay" data-i18n="calc.delayHours"></label>
+                <input id="f-delay" name="delayHours" type="number" inputmode="decimal" min="0" max="24" step="0.25" value="2">
+              </div>
+            </div>
+            <p class="hint sample-note" data-i18n="calc.sampleNote"></p>
+
+            <fieldset class="field">
+              <legend data-i18n="calc.inSun"></legend>
+              <div class="segmented">
+                <label><input type="radio" name="inSun" value="yes" checked><span data-i18n="calc.yes"></span></label>
+                <label><input type="radio" name="inSun" value="no"><span data-i18n="calc.no"></span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field">
+              <legend data-i18n="calc.truck"></legend>
+              <div class="segmented">
+                <label><input type="radio" name="truck" value="closed" checked><span data-i18n="calc.truckClosed"></span></label>
+                <label><input type="radio" name="truck" value="covered"><span data-i18n="calc.truckCovered"></span></label>
+              </div>
+            </fieldset>
+          </form>
+
+          <div class="card calc-result" id="calc-result" aria-live="polite">
+            <div class="result-top">
+              <div>
+                <div class="result-label" data-i18n="calc.remaining"></div>
+                <div class="result-value"><span class="num" id="r-days">–</span> <span data-i18n="calc.days"></span></div>
+                <div class="result-of" id="r-of"></div>
+              </div>
+              <div class="pill" id="r-cat"></div>
+            </div>
+            <div class="meter" aria-hidden="true"><span id="r-meter"></span></div>
+
+            <div class="recommend">
+              <div class="result-label" data-i18n="calc.recommend"></div>
+              <div class="recommend-value" id="r-rec"></div>
+            </div>
+
+            <div class="chart-wrap">
+              <div class="result-label" data-i18n="calc.chartTitle"></div>
+              <svg id="r-chart" class="chart" role="img" data-i18n-attr="aria-label:calc.chartAria"></svg>
+            </div>
+
+            <p class="shade-compare" id="r-shade"></p>
+            <p class="hint"><span data-i18n="calc.disclaimer"></span> <a href="https://github.com/RushdiJa/amdad/blob/main/docs/model.md" rel="noopener" data-i18n="calc.modelLink"></a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Demo 2: allocation ============ -->
+    <section class="section section-tint" id="allocation">
+      <div class="container">
+        <p class="kicker" data-i18n="alloc.kicker"></p>
+        <h2 data-i18n="alloc.title"></h2>
+        <p class="section-intro" data-i18n="alloc.intro"></p>
+
+        <div class="alloc-grid">
+          <div class="card">
+            <div class="card-head">
+              <h3 data-i18n="alloc.batches"></h3>
+              <span class="hint" data-i18n="alloc.sampleNote"></span>
+            </div>
+            <div class="edit-list" id="batch-list"></div>
+            <div class="btn-row">
+              <button type="button" class="btn btn-small" id="add-batch" data-i18n="alloc.addBatch"></button>
+              <button type="button" class="btn btn-small btn-accent" id="add-from-demo" data-i18n="alloc.addFromDemo"></button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <h3 data-i18n="alloc.customers"></h3>
+              <span class="hint" data-i18n="alloc.sampleNote"></span>
+            </div>
+            <div class="edit-list" id="customer-list"></div>
+            <div class="btn-row">
+              <button type="button" class="btn btn-small" id="add-customer" data-i18n="alloc.addCustomer"></button>
+              <button type="button" class="btn btn-small btn-link" id="reset-alloc" data-i18n="alloc.reset"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card alloc-result">
+          <h3 data-i18n="alloc.result"></h3>
+          <div class="table-wrap">
+            <table class="alloc-table" id="alloc-table">
+              <thead>
+                <tr>
+                  <th scope="col" data-i18n="alloc.col.order"></th>
+                  <th scope="col" data-i18n="alloc.col.batch"></th>
+                  <th scope="col" data-i18n="alloc.col.remaining"></th>
+                  <th scope="col" data-i18n="alloc.col.sendTo"></th>
+                  <th scope="col" data-i18n="alloc.col.spare"></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="alloc-summary" id="alloc-summary" aria-live="polite"></p>
+          <p class="hint" data-i18n="alloc.baselineNote"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WhatsApp preview ============ -->
+    <section class="section" id="whatsapp">
+      <div class="container wa-section">
+        <div class="wa-text">
+          <p class="kicker" data-i18n="wa.kicker"></p>
+          <h2 data-i18n="wa.title"></h2>
+          <p class="section-intro" data-i18n="wa.intro"></p>
+        </div>
+        <div class="phone" aria-label="WhatsApp preview">
+          <div class="phone-notch" aria-hidden="true"></div>
+          <div class="wa-header">
+            <img src="assets/logo.svg" alt="" width="34" height="34">
+            <div>
+              <div class="wa-name"><span data-i18n="wa.contact"></span> <span class="wa-verified" aria-hidden="true">✔</span></div>
+              <div class="wa-status" data-i18n="wa.status"></div>
+            </div>
+          </div>
+          <div class="wa-chat">
+            <div class="wa-day" data-i18n="wa.today"></div>
+            <div class="wa-bubble" id="wa-message" aria-live="polite"></div>
+          </div>
+          <div class="wa-input" aria-hidden="true">
+            <span class="wa-field" data-i18n="wa.inputPlaceholder"></span>
+            <span class="wa-mic">🎤</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Team ============ -->
+    <section class="section section-tint" id="team">
+      <div class="container">
+        <p class="kicker" data-i18n="team.kicker"></p>
+        <h2 data-i18n="team.title"></h2>
+        <ul class="team-grid">
+          <li class="member"><span class="avatar" aria-hidden="true">A</span><strong data-i18n="team.aram"></strong><span data-i18n="role.research"></span></li>
+          <li class="member"><span class="avatar" aria-hidden="true">E</span><strong data-i18n="team.eman"></strong><span data-i18n="role.design"></span></li>
+          <li class="member"><span class="avatar" aria-hidden="true">R</span><strong data-i18n="team.rushdi"></strong><span data-i18n="role.field"></span></li>
+          <li class="member"><span class="avatar" aria-hidden="true">M</span><strong data-i18n="team.melissa"></strong><span data-i18n="role.business"></span></li>
+          <li class="member"><span class="avatar" aria-hidden="true">W</span><strong data-i18n="team.waseem"></strong><span data-i18n="role.mvp"></span></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" alt="" width="32" height="32">
+        <span data-i18n="footer.name"></span>
+      </div>
+      <a class="footer-link" href="https://github.com/RushdiJa/amdad" rel="noopener">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span data-i18n="footer.repo"></span>
+      </a>
+      <p class="footer-note" data-i18n="footer.disclaimer"></p>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/allocation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
