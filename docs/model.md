@@ -1,4 +1,4 @@
-# Amdad shelf-life model
+# Imdad shelf-life model
 
 > **All numbers on this page are sample values for demonstration.** The real product will be calibrated with sensor data from Palestinian trips.
 

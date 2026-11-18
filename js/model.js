@@ -1,5 +1,5 @@
 /**
- * Amdad — Shelf-life model (runs entirely in the browser)
+ * Imdad — Shelf-life model (runs entirely in the browser)
  * ------------------------------------------------------------------
  * A simplified temperature–time model based on the Q10 rule:
  * the rate of quality loss in fresh produce speeds up roughly
@@ -179,7 +179,7 @@
     };
   }
 
-  global.AmdadModel = {
+  global.ImdadModel = {
     T_REF: T_REF,
     Q10: Q10,
     PRODUCTS: PRODUCTS,

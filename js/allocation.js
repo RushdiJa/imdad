@@ -1,5 +1,5 @@
 /**
- * Amdad — Batch allocation (FEFO: First Expired, First Out)
+ * Imdad — Batch allocation (FEFO: First Expired, First Out)
  * ------------------------------------------------------------------
  * Goal: send each batch to a customer who will sell it BEFORE it spoils.
  *
@@ -88,7 +88,7 @@
     return { assignments: assignments, mismatches: mismatches };
   }
 
-  global.AmdadAllocation = {
+  global.ImdadAllocation = {
     SAMPLE_BATCHES: SAMPLE_BATCHES,
     SAMPLE_CUSTOMERS: SAMPLE_CUSTOMERS,
     allocate: allocate,

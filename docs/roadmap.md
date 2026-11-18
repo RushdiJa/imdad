@@ -1,4 +1,4 @@
-# Amdad roadmap
+# Imdad roadmap
 
 ## Phase 0: MVP (this repository) ✅
 

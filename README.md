@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="Amdad logo" width="96" height="96">
+  <img src="assets/logo.svg" alt="Imdad logo" width="96" height="96">
 </p>
 
-<h1 align="center">Amdad · إمداد</h1>
+<h1 align="center">Imdad · إمداد</h1>
 
 <p align="center">
   <strong>Know how much life each batch has left, and where to send it.</strong><br>
@@ -10,13 +10,13 @@
 </p>
 
 <p align="center">
-  <a href="https://rushdija.github.io/amdad/"><img alt="Live demo" src="https://img.shields.io/badge/live%20demo-GitHub%20Pages-1f9d55?style=for-the-badge"></a>
+  <a href="https://rushdija.github.io/imdad/"><img alt="Live demo" src="https://img.shields.io/badge/live%20demo-GitHub%20Pages-1f9d55?style=for-the-badge"></a>
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-f28c28?style=for-the-badge">
   <img alt="No build step" src="https://img.shields.io/badge/stack-HTML%20%7C%20CSS%20%7C%20JS-1b2a22?style=for-the-badge">
 </p>
 
 <p align="center">
-  <a href="https://rushdija.github.io/amdad/"><strong>🌐 Live demo</strong></a> ·
+  <a href="https://rushdija.github.io/imdad/"><strong>🌐 Live demo</strong></a> ·
   <a href="README.ar.md">🇵🇸 اقرأ بالعربية</a> ·
   <a href="docs/model.md">📐 Model</a> ·
   <a href="docs/roadmap.md">🗺️ Roadmap</a>
@@ -24,7 +24,7 @@
 
 ---
 
-Amdad is a startup in the **Smart Commerce Challenge 2026 (Palestine)**, challenge area **Logistics & Supply Chain**. This repository is the frontend-only MVP: a bilingual landing page with interactive demos of the shelf-life estimate, the batch allocation and the WhatsApp recommendation.
+Imdad is a startup in the **Smart Commerce Challenge 2026 (Palestine)**, challenge area **Logistics & Supply Chain**. This repository is the frontend-only MVP: a bilingual landing page with interactive demos of the shelf-life estimate, the batch allocation and the WhatsApp recommendation.
 
 ## The problem
 
@@ -107,13 +107,13 @@ A "virtual sensor" estimates the truck's inside temperature from the outside tem
 Clone the repository and open `index.html` in your browser. That's it.
 
 ```bash
-git clone https://github.com/RushdiJa/amdad.git
+git clone https://github.com/RushdiJa/imdad.git
 ```
 
 ## Project structure
 
 ```
-amdad/
+imdad/
 ├── index.html            # single-page site
 ├── css/style.css         # mobile-first styles, RTL/LTR
 ├── js/i18n.js            # all Arabic & English text + language switching
@@ -165,7 +165,7 @@ Details: [docs/roadmap.md](docs/roadmap.md)
 | Eman Jallad | Business & Marketing |
 | Rushdi Jallad | MVP Development |
 | Melissa Odeh | UI/UX Design |
-| Waseem Yahya | Testing & Operations |
+| Waseem Yahya | Testing & QA |
 
 ## ⚠️ Disclaimer
 
@@ -173,7 +173,7 @@ Demo estimates use a **simplified scientific model with sample values**. They ar
 
 ## Contributing & license
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Released under the [MIT License](LICENSE) © 2026 Amdad Team.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Released under the [MIT License](LICENSE) © 2026 Imdad Team.
 
 ---
 

@@ -1,14 +1,14 @@
-# Contributing to Amdad
+# Contributing to Imdad
 
-Thanks for your interest in Amdad (إمداد)! This is a small, static MVP, so contributing is simple.
+Thanks for your interest in Imdad (إمداد)! This is a small, static MVP, so contributing is simple.
 
 ## Run locally
 
 No build step and no dependencies. Clone the repo and open `index.html` in a browser:
 
 ```bash
-git clone https://github.com/RushdiJa/amdad.git
-cd amdad
+git clone https://github.com/RushdiJa/imdad.git
+cd imdad
 ```
 
 Then open `index.html` directly, or serve the folder (optional) with any static server, e.g. `python3 -m http.server 8000`.

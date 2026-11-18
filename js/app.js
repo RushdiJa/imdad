@@ -1,5 +1,5 @@
 /**
- * Amdad — UI wiring
+ * Imdad — UI wiring
  * ------------------------------------------------------------------
  * Connects the form inputs to the model (js/model.js), renders the
  * results, the SVG bar chart, the allocation demo (js/allocation.js)
@@ -8,9 +8,9 @@
 (function () {
   'use strict';
 
-  var I18n = window.AmdadI18n;
-  var Model = window.AmdadModel;
-  var Alloc = window.AmdadAllocation;
+  var I18n = window.ImdadI18n;
+  var Model = window.ImdadModel;
+  var Alloc = window.ImdadAllocation;
   var t = I18n.t;
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };

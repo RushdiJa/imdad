@@ -1,5 +1,5 @@
 /**
- * Amdad — Translations (Arabic default, RTL / English, LTR)
+ * Imdad — Translations (Arabic default, RTL / English, LTR)
  * ------------------------------------------------------------------
  * All user-facing text lives here. HTML elements use:
  *   data-i18n="key"             → textContent
@@ -10,7 +10,7 @@
 (function (global) {
   'use strict';
 
-  var STORAGE_KEY = 'amdad-lang';
+  var STORAGE_KEY = 'imdad-lang';
   var DEFAULT_LANG = 'ar';
 
   var translations = {
@@ -189,7 +189,7 @@
       'team.waseem': 'وسيم يحيى',
       'role.research': 'البحث',
       'role.design': 'تصميم UI/UX',
-      'role.ops': 'الاختبار والعمليات',
+      'role.qa': 'الاختبار وضمان الجودة (QA)',
       'role.business': 'الأعمال والتسويق',
       'role.mvp': 'تطوير النموذج الأولي',
 
@@ -238,10 +238,10 @@
     },
 
     en: {
-      'meta.title': 'Amdad | Know how much life each batch has left',
-      'meta.description': 'Amdad: a sensor travels with each shipment and an ML model estimates each produce batch\'s remaining shelf life, then recommends the right customer on WhatsApp. MVP, Smart Commerce Challenge 2026.',
+      'meta.title': 'Imdad | Know how much life each batch has left',
+      'meta.description': 'Imdad: a sensor travels with each shipment and an ML model estimates each produce batch\'s remaining shelf life, then recommends the right customer on WhatsApp. MVP, Smart Commerce Challenge 2026.',
       'skip': 'Skip to content',
-      'brand': 'Amdad',
+      'brand': 'Imdad',
       'nav.problem': 'Problem',
       'nav.customer': 'Customer',
       'nav.how': 'How it works',
@@ -282,7 +282,7 @@
       'problem.f4': '<strong>Supply tender, Al-Ghad Al-Mushriq, Aug 2026:</strong> the supplier must replace spoiled goods within 24 hours at its own cost, and payment is deferred. The loss from a bad batch falls on the distributor.',
 
       'how.kicker': 'The solution',
-      'how.title': 'How Amdad works',
+      'how.title': 'How Imdad works',
       'how.intro': 'Three simple steps, without changing how the distributor works.',
       'how.s1.title': 'A sensor travels with the shipment',
       'how.s1.text': 'A small, reusable sensor logs temperature and time from harvest to delivery, including checkpoint waits.',
@@ -391,11 +391,11 @@
       'wa.kicker': 'Preview',
       'wa.title': 'The message the distributor receives',
       'wa.intro': 'Updates live from the calculator above, in the selected language.',
-      'wa.contact': 'Amdad',
+      'wa.contact': 'Imdad',
       'wa.status': 'Business account',
       'wa.today': 'Today',
       'wa.inputPlaceholder': 'Message',
-      'wa.msg.header': '📦 *Amdad* | Batch report',
+      'wa.msg.header': '📦 *Imdad* | Batch report',
       'wa.msg.product': '{emoji} {product}, {quality} quality',
       'wa.msg.remaining': '⏳ Remaining shelf life: *{days} days* {dot} ({cat})',
       'wa.msg.checkpoint': '🌡️ Truck temperature while waiting ({cp}): ~{temp}°C for {hours} h',
@@ -404,7 +404,7 @@
       'wa.msg.footer': 'Reply 1 to confirm, or 2 for trip details.',
 
       'team.kicker': 'Team',
-      'team.title': 'The team behind Amdad',
+      'team.title': 'The team behind Imdad',
       'team.aram': 'Aram Odeh',
       'team.eman': 'Eman Jallad',
       'team.rushdi': 'Rushdi Jallad',
@@ -412,7 +412,7 @@
       'team.waseem': 'Waseem Yahya',
       'role.research': 'Research',
       'role.design': 'UI/UX Design',
-      'role.ops': 'Testing & Operations',
+      'role.qa': 'Testing & QA',
       'role.business': 'Business & Marketing',
       'role.mvp': 'MVP Development',
 
@@ -455,7 +455,7 @@
       'pilot.a4': 'Distributors have customers with different storage times, so allocating by shelf life makes a real difference.',
       'pilot.a5': 'Traders will follow the recommendations and report what happened to each batch, so the model keeps improving.',
 
-      'footer.name': 'Amdad, Smart Commerce Challenge 2026',
+      'footer.name': 'Imdad, Smart Commerce Challenge 2026',
       'footer.repo': 'Source on GitHub',
       'footer.disclaimer': 'Demo estimates use a simplified scientific model with sample values. The real product will be calibrated with sensor data from Palestinian trips.'
     }
@@ -522,7 +522,7 @@
 
   current = loadLang();
 
-  global.AmdadI18n = {
+  global.ImdadI18n = {
     translations: translations,
     t: t,
     apply: apply,

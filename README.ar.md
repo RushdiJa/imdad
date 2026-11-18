@@ -4,19 +4,19 @@
   <img src="assets/logo.svg" alt="شعار إمداد" width="96" height="96">
 </p>
 
-<h1 align="center">إمداد · Amdad</h1>
+<h1 align="center">إمداد · Imdad</h1>
 
 <p align="center">
   <strong>اعرف كم باقي من عمر كل دفعة، ولوين تبعتها.</strong>
 </p>
 
 <p align="center">
-  <a href="https://rushdija.github.io/amdad/"><img alt="العرض المباشر" src="https://img.shields.io/badge/live%20demo-GitHub%20Pages-1f9d55?style=for-the-badge"></a>
+  <a href="https://rushdija.github.io/imdad/"><img alt="العرض المباشر" src="https://img.shields.io/badge/live%20demo-GitHub%20Pages-1f9d55?style=for-the-badge"></a>
   <img alt="الرخصة: MIT" src="https://img.shields.io/badge/license-MIT-f28c28?style=for-the-badge">
 </p>
 
 <p align="center">
-  <a href="https://rushdija.github.io/amdad/"><strong>🌐 العرض المباشر</strong></a> ·
+  <a href="https://rushdija.github.io/imdad/"><strong>🌐 العرض المباشر</strong></a> ·
   <a href="README.md">🇬🇧 English</a> ·
   <a href="docs/model.md">📐 النموذج</a> ·
   <a href="docs/roadmap.md">🗺️ خارطة الطريق</a>
@@ -113,7 +113,7 @@ remaining_days = base_shelf_life × quality_factor − Σ consumed_days
 <div dir="ltr">
 
 ```bash
-git clone https://github.com/RushdiJa/amdad.git
+git clone https://github.com/RushdiJa/imdad.git
 ```
 
 </div>
@@ -123,7 +123,7 @@ git clone https://github.com/RushdiJa/amdad.git
 <div dir="ltr">
 
 ```
-amdad/
+imdad/
 ├── index.html
 ├── css/style.css
 ├── js/i18n.js            # all Arabic & English text
@@ -176,7 +176,7 @@ amdad/
 | إيمان الجلاد | الأعمال والتسويق |
 | رشدي الجلاد | تطوير النموذج الأولي |
 | ميليسا عودة | تصميم UI/UX |
-| وسيم يحيى | الاختبار والعمليات |
+| وسيم يحيى | الاختبار وضمان الجودة (QA) |
 
 ## ⚠️ تنبيه
 
