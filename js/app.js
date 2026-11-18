@@ -97,7 +97,7 @@
     var max = Math.max.apply(null, r.stages.map(function (s) { return s.consumed; }).concat([0.1]));
     var valueSpace = 64;            // room for the value label after the bar
     var maxBar = W - valueSpace;
-    var colors = { beforeLoading: '#f5b14c', driving: '#f28c28', checkpoint: '#d9480f' };
+    var colors = { beforeLoading: '#e3c565', driving: '#c9a227', checkpoint: '#4a2a7a' };
 
     function el(name, attrs, text) {
       var n = document.createElementNS(SVG_NS, name);
