@@ -42,6 +42,7 @@
       </a>
       <nav class="main-nav" id="main-nav" aria-label="Main">
         <a href="#problem" data-i18n="nav.problem">المشكلة</a>
+        <a href="#customer" data-i18n="nav.customer">الزبون</a>
         <a href="#how" data-i18n="nav.how">كيف يعمل</a>
         <a href="#demo" data-i18n="nav.demo">الحاسبة</a>
         <a href="#allocation" data-i18n="nav.allocation">التوزيع</a>
@@ -93,6 +94,10 @@
         <p class="kicker" data-i18n="problem.kicker"></p>
         <h2 data-i18n="problem.title"></h2>
         <p class="section-intro" data-i18n="problem.intro"></p>
+        <blockquote class="statement">
+          <span class="statement-label" data-i18n="problem.statementLabel"></span>
+          <p data-i18n="problem.statement"></p>
+        </blockquote>
         <div class="cards-3">
           <article class="card problem-card">
             <div class="icon icon-orange" aria-hidden="true">
@@ -122,13 +127,38 @@
             <li data-i18n-html="problem.f1"></li>
             <li data-i18n-html="problem.f2"></li>
             <li data-i18n-html="problem.f3"></li>
+            <li data-i18n-html="problem.f4"></li>
           </ul>
         </aside>
       </div>
     </section>
 
+    <!-- ============ Target customer ============ -->
+    <section class="section section-tint" id="customer">
+      <div class="container">
+        <p class="kicker" data-i18n="customer.kicker"></p>
+        <h2 data-i18n="customer.title"></h2>
+        <p class="section-intro" data-i18n="customer.intro"></p>
+        <article class="card persona">
+          <div class="persona-head">
+            <span class="avatar persona-avatar" aria-hidden="true">👨🏻‍🌾</span>
+            <div>
+              <h3 data-i18n="persona.name"></h3>
+              <p class="persona-role" data-i18n="persona.role"></p>
+            </div>
+            <span class="tag" data-i18n="persona.tag"></span>
+          </div>
+          <dl class="persona-grid">
+            <div><dt data-i18n="persona.contextLabel"></dt><dd data-i18n="persona.context"></dd></div>
+            <div><dt data-i18n="persona.painsLabel"></dt><dd data-i18n="persona.pains"></dd></div>
+            <div><dt data-i18n="persona.motivationsLabel"></dt><dd data-i18n="persona.motivations"></dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
     <!-- ============ How it works ============ -->
-    <section class="section section-tint" id="how">
+    <section class="section" id="how">
       <div class="container">
         <p class="kicker" data-i18n="how.kicker"></p>
         <h2 data-i18n="how.title"></h2>
@@ -160,6 +190,32 @@
           </li>
         </ol>
         <p class="inspired" data-i18n="how.inspired"></p>
+      </div>
+    </section>
+
+    <!-- ============ Ideas considered ============ -->
+    <section class="section section-tint" id="ideas">
+      <div class="container">
+        <p class="kicker" data-i18n="ideas.kicker"></p>
+        <h2 data-i18n="ideas.title"></h2>
+        <p class="section-intro" data-i18n="ideas.intro"></p>
+        <div class="cards-3">
+          <article class="card idea-card idea-set-aside">
+            <span class="tag tag-muted" data-i18n="ideas.setAside"></span>
+            <h3 data-i18n="ideas.i1.title"></h3>
+            <p data-i18n-html="ideas.i1.text"></p>
+          </article>
+          <article class="card idea-card idea-set-aside">
+            <span class="tag tag-muted" data-i18n="ideas.setAside"></span>
+            <h3 data-i18n="ideas.i2.title"></h3>
+            <p data-i18n-html="ideas.i2.text"></p>
+          </article>
+          <article class="card idea-card idea-chosen">
+            <span class="tag" data-i18n="ideas.chosen"></span>
+            <h3 data-i18n="ideas.i3.title"></h3>
+            <p data-i18n-html="ideas.i3.text"></p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -349,17 +405,42 @@
       </div>
     </section>
 
+    <!-- ============ Feasibility & assumptions ============ -->
+    <section class="section section-tint" id="pilot">
+      <div class="container">
+        <p class="kicker" data-i18n="pilot.kicker"></p>
+        <h2 data-i18n="pilot.title"></h2>
+        <p class="section-intro" data-i18n="pilot.intro"></p>
+        <ul class="stats">
+          <li><strong>2–3</strong><span data-i18n="pilot.s1"></span></li>
+          <li><strong>3–5</strong><span data-i18n="pilot.s2"></span></li>
+          <li><strong>10–20</strong><span data-i18n="pilot.s3"></span></li>
+          <li><strong>0</strong><span data-i18n="pilot.s4"></span></li>
+        </ul>
+        <div class="card assumptions">
+          <h3 data-i18n="pilot.assumptionsTitle"></h3>
+          <ul>
+            <li data-i18n="pilot.a1"></li>
+            <li data-i18n="pilot.a2"></li>
+            <li data-i18n="pilot.a3"></li>
+            <li data-i18n="pilot.a4"></li>
+            <li data-i18n="pilot.a5"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ Team ============ -->
-    <section class="section section-tint" id="team">
+    <section class="section" id="team">
       <div class="container">
         <p class="kicker" data-i18n="team.kicker"></p>
         <h2 data-i18n="team.title"></h2>
         <ul class="team-grid">
           <li class="member"><span class="avatar" aria-hidden="true">A</span><strong data-i18n="team.aram"></strong><span data-i18n="role.research"></span></li>
-          <li class="member"><span class="avatar" aria-hidden="true">E</span><strong data-i18n="team.eman"></strong><span data-i18n="role.design"></span></li>
-          <li class="member"><span class="avatar" aria-hidden="true">R</span><strong data-i18n="team.rushdi"></strong><span data-i18n="role.field"></span></li>
-          <li class="member"><span class="avatar" aria-hidden="true">M</span><strong data-i18n="team.melissa"></strong><span data-i18n="role.business"></span></li>
-          <li class="member"><span class="avatar" aria-hidden="true">W</span><strong data-i18n="team.waseem"></strong><span data-i18n="role.mvp"></span></li>
+          <li class="member"><span class="avatar" aria-hidden="true">E</span><strong data-i18n="team.eman"></strong><span data-i18n="role.business"></span></li>
+          <li class="member"><span class="avatar" aria-hidden="true">R</span><strong data-i18n="team.rushdi"></strong><span data-i18n="role.mvp"></span></li>
+          <li class="member"><span class="avatar" aria-hidden="true">M</span><strong data-i18n="team.melissa"></strong><span data-i18n="role.design"></span></li>
+          <li class="member"><span class="avatar" aria-hidden="true">W</span><strong data-i18n="team.waseem"></strong><span data-i18n="role.ops"></span></li>
         </ul>
       </div>
     </section>

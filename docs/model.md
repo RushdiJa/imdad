@@ -116,4 +116,4 @@ The "without allocation" baseline assumes batches are dispatched blindly in arri
 - The quality dropdown replaces a real visual or photo-based inspection.
 - Allocation ignores customer capacity, prices, distance and delivery routes.
 
-The production version replaces these assumptions with real sensor logs and a machine learning model trained on observed shelf life from Palestinian trips. See [roadmap.md](roadmap.md).
+The production version uses a specialized machine learning model trained on real sensor data: temperature, trip duration, checkpoint delays and product type. Wageningen research (Cappers et al., 2013) showed that this kind of damage can be predicted from temperature and time data. The production version replaces these assumptions with real sensor logs and a machine learning model trained on observed shelf life from Palestinian trips. See [roadmap.md](roadmap.md).

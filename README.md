@@ -24,21 +24,48 @@
 
 ---
 
-Amdad is a startup in the **Smart Commerce Challenge 2026 (Palestine)**. This repository is the frontend-only MVP: a bilingual landing page with interactive demos of the shelf-life estimate, the batch allocation and the WhatsApp recommendation.
+Amdad is a startup in the **Smart Commerce Challenge 2026 (Palestine)**, challenge area **Logistics & Supply Chain**. This repository is the frontend-only MVP: a bilingual landing page with interactive demos of the shelf-life estimate, the batch allocation and the WhatsApp recommendation.
 
 ## The problem
 
 Wholesale produce distributors in the West Bank move fruit and vegetables in **unrefrigerated trucks through checkpoints** such as Hamra and Tayasir. Heat and delays damage batches invisibly, so batches harvested the same day end up with **different remaining shelf life**. Distributors unknowingly send near-spoiled produce to customers who store it for days, and then **pay for the returns**.
 
-- **MAS (2025):** 14 checkpoints on key routes, average delay 42 minutes.
-- **PNN (2025):** a Hebron trader waited 1–4 hours at checkpoints; produce spoiled in closed trucks.
-- **Wageningen University research:** 30–50% tomato losses in unrefrigerated trucks.
+> **Problem statement:** Wholesale produce distributors in Palestine need a way to match each batch to the right customer based on its remaining shelf life, because checkpoint delays and heat cause hidden damage that only shows up after delivery.
+
+**Root-cause evidence**
+
+| Source | What it shows |
+|---|---|
+| PNN news report, Jul 2025 (interview with Hebron vegetable merchant Shadwan Abu Sneineh) | Waits of 1–4 hours at checkpoints, including Hamra. Produce quality is ruined, and some loads spoil fully inside closed trucks. |
+| MAS, Palestine Economic Policy Research Institute, Mar 2025 | 14 checkpoints on key routes, with an average delay of 42 minutes per checkpoint. Delays are routine and unpredictable. |
+| Supply tender, Al-Ghad Al-Mushriq, Aug 2026 | The supplier must replace spoiled goods within 24 hours at its own cost, and payment is deferred. The loss from a bad batch falls on the distributor. |
+| Cappers et al., Wageningen University & Univ. of Milan, 2013 (peer-reviewed) | Heat and time inside unrefrigerated trucks caused 30–50% tomato losses. The damage builds up invisibly and can be predicted from weather data. |
+
+## Target customer
+
+**Small and medium wholesale produce distributors in the West Bank** who own the goods they sell and move them in unrefrigerated trucks through checkpoints (e.g. Jordan Valley to Hebron, Nablus and Ramallah). They feel the pain most directly: supply contracts make them bear the cost of spoiled goods, while commission agents pass losses on to farmers.
+
+| Example persona | Abu Khaled, 45, wholesale produce distributor in Hebron |
+|---|---|
+| Context | Buys tomatoes and cucumbers from the Jordan Valley and moves them in unrefrigerated trucks through checkpoints like Hamra. Supplies restaurants, small groceries and supermarkets daily. |
+| Pain points | Can't tell which batches were damaged by heat and delays. Spoiled goods come back as returns and deductions, and he loses customers who received bad produce. |
+| Motivations | Wants to cut losses, keep his customers' trust, and get the best price for each batch. |
 
 ## The solution
 
-A **reusable sensor travels with each shipment**, and a **specialized machine learning model** estimates each batch's remaining shelf life and **recommends the right customer**. Recommendations are delivered on **WhatsApp**, the tool distributors already use.
+A **reusable sensor travels with each shipment**, and a **specialized machine learning model** analyzes its data (temperature, trip duration, checkpoint delays, product type) to estimate each batch's remaining shelf life and **recommend the right customer**: same-day buyers like restaurants, or buyers who store longer like supermarkets. We chose a specialized model over a general language model to keep costs low. Recommendations are delivered on **WhatsApp**, the tool distributors already use.
 
-Inspired by Zest Fresh (USA), adapted to Palestine: checkpoints, unrefrigerated trucks and small distributors.
+Inspired by Zest Fresh (USA), which showed that batches harvested the same day can have different remaining shelf life, and that allocating by shelf life reduces waste. Adapted to Palestine: checkpoints, unrefrigerated trucks and small distributors.
+
+**Value proposition:** tells Palestinian wholesale distributors how much life each batch has left and which customer to send it to, so they cut spoilage, returns and lost customers caused by heat and checkpoint delays.
+
+### Ideas we considered
+
+| Idea | Decision |
+|---|---|
+| Shared refrigerated trucks | Set aside. It prevents heat damage at the source, but costs a lot, is hard to coordinate between traders, and doesn't solve long checkpoint delays. |
+| Checkpoint alert app for drivers | Set aside. Drivers could avoid crowded checkpoints, but delays are often unavoidable, and it doesn't tell the trader what happened to the goods or where to send them. |
+| **Shelf-life tracking and smart allocation** | **Chosen.** Targets the root cause (hidden heat and time damage), is proven abroad, and is affordable with a reusable sensor and a specialized model. |
 
 ## How it works
 
@@ -109,10 +136,22 @@ amdad/
 | ![Hero section in English](docs/screenshots/hero-en.png) | ![Mobile view in Arabic](docs/screenshots/mobile-ar.png) |
 | ![Shelf-life calculator](docs/screenshots/calculator-en.png) | ![WhatsApp preview in Arabic](docs/screenshots/whatsapp-ar.png) |
 
+## Feasibility and key assumptions
+
+A pilot needs only **2–3 reusable sensors** rotated between trucks, **3–5 distributors**, and **10–20 real trips** to collect data and train the first model. Recommendations arrive on WhatsApp, so no new app is needed.
+
+Key assumptions we will test:
+
+- Distributors are willing to pay a small monthly fee if the system reduces their losses.
+- Drivers will carry the sensor and return it after each trip.
+- 10–20 trips are enough to train a model accurate enough to sort batches into three groups: sell today, 2–3 days, or 4+ days.
+- Distributors have customers with different storage times, so allocating by shelf life makes a real difference.
+- Traders will follow the recommendations and report what happened to each batch, so the model keeps improving.
+
 ## Roadmap
 
 1. **MVP** (this repo): landing page and interactive demos.
-2. **Pilot** with 3–5 distributors and real sensors on Palestinian routes.
+2. **Pilot** with 3–5 distributors, 2–3 rotating sensors and 10–20 real trips on Palestinian routes.
 3. **Trained ML model** calibrated on pilot data, with photo-based quality checks.
 4. **WhatsApp bot** delivering per-batch recommendations automatically.
 
@@ -123,10 +162,10 @@ Details: [docs/roadmap.md](docs/roadmap.md)
 | Name | Role |
 |---|---|
 | Aram Odeh | Research |
-| Eman Jallad | UI/UX Design |
-| Rushdi Jallad | Field Testing |
-| Melissa Odeh | Business & Marketing |
-| Waseem Yahya | MVP Development |
+| Eman Jallad | Business & Marketing |
+| Rushdi Jallad | MVP Development |
+| Melissa Odeh | UI/UX Design |
+| Waseem Yahya | Testing & Operations |
 
 ## ⚠️ Disclaimer
 
