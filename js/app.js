@@ -44,7 +44,6 @@
       hoursBeforeLoading: parseFloat(fd.get('hoursBeforeLoading')) || 0,
       outsideTemp: parseFloat(fd.get('outsideTemp')),
       drivingHours: parseFloat(fd.get('drivingHours')) || 0,
-      checkpoint: fd.get('checkpoint'),
       delayHours: parseFloat(fd.get('delayHours')) || 0,
       inSun: fd.get('inSun') === 'yes',
       truck: fd.get('truck')
@@ -132,12 +131,6 @@
     });
   }
 
-  // Checkpoint preset fills the default delay (still editable).
-  $('#f-checkpoint').addEventListener('change', function (e) {
-    var preset = Model.CHECKPOINTS[e.target.value];
-    if (preset) $('#f-delay').value = preset.delayHours;
-    updateCalculator();
-  });
   form.addEventListener('input', updateCalculator);
   form.addEventListener('change', updateCalculator);
   form.addEventListener('submit', function (e) { e.preventDefault(); });
@@ -154,7 +147,7 @@
       '',
       t('wa.msg.product', { emoji: r.emoji, product: t('product.' + input.product), quality: t('quality.' + input.quality) }),
       t('wa.msg.remaining', { days: fmt(r.remainingDays), dot: CAT_DOT[r.category], cat: t('cat.' + r.category) }),
-      t('wa.msg.checkpoint', { cp: t('checkpointName.' + input.checkpoint), temp: fmt(cpStage.temp).replace(/\.0$/, ''), hours: fmtH(cpStage.hours) }),
+      t('wa.msg.checkpoint', { temp: fmt(cpStage.temp).replace(/\.0$/, ''), hours: fmtH(cpStage.hours) }),
       t('wa.msg.recommend', { rec: t('rec.' + r.category) })
     ];
     if (input.inSun && r.remainingIfShade > r.remainingDays) {

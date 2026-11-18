@@ -47,6 +47,7 @@
         <a href="#demo" data-i18n="nav.demo">الحاسبة</a>
         <a href="#allocation" data-i18n="nav.allocation">التوزيع</a>
         <a href="#whatsapp" data-i18n="nav.whatsapp">واتساب</a>
+        <a href="#future" data-i18n="nav.future">المستقبل</a>
         <a href="#team" data-i18n="nav.team">الفريق</a>
       </nav>
       <div class="header-actions">
@@ -254,22 +255,11 @@
               <label for="f-driving" data-i18n="calc.drivingHours"></label>
               <input id="f-driving" name="drivingHours" type="number" inputmode="decimal" min="0" max="48" step="0.5" value="3">
             </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="f-checkpoint" data-i18n="calc.checkpoint"></label>
-                <select id="f-checkpoint" name="checkpoint">
-                  <option value="hamra" data-i18n="checkpoint.hamra"></option>
-                  <option value="tayasir" data-i18n="checkpoint.tayasir"></option>
-                  <option value="container" data-i18n="checkpoint.container"></option>
-                  <option value="other" data-i18n="checkpoint.other"></option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="f-delay" data-i18n="calc.delayHours"></label>
-                <input id="f-delay" name="delayHours" type="number" inputmode="decimal" min="0" max="24" step="0.25" value="2">
-              </div>
+            <div class="field">
+              <label for="f-delay" data-i18n="calc.delayHours"></label>
+              <input id="f-delay" name="delayHours" type="number" inputmode="decimal" min="0" max="24" step="0.25" value="2" aria-describedby="delay-note">
+              <p class="hint field-note" id="delay-note" data-i18n="calc.delayNote"></p>
             </div>
-            <p class="hint sample-note" data-i18n="calc.sampleNote"></p>
 
             <fieldset class="field">
               <legend data-i18n="calc.inSun"></legend>
@@ -423,8 +413,40 @@
       </div>
     </section>
 
+    <!-- ============ Future plans ============ -->
+    <section class="section" id="future">
+      <div class="container">
+        <p class="kicker" data-i18n="future.kicker"></p>
+        <h2 data-i18n="future.title"></h2>
+        <p class="section-intro" data-i18n="future.intro"></p>
+        <ol class="steps steps-4">
+          <li class="step step-highlight">
+            <span class="step-num">1</span>
+            <span class="tag" data-i18n="future.new"></span>
+            <h3 data-i18n="future.f1.title"></h3>
+            <p data-i18n-html="future.f1.text"></p>
+          </li>
+          <li class="step">
+            <span class="step-num">2</span>
+            <h3 data-i18n="future.f2.title"></h3>
+            <p data-i18n="future.f2.text"></p>
+          </li>
+          <li class="step">
+            <span class="step-num">3</span>
+            <h3 data-i18n="future.f3.title"></h3>
+            <p data-i18n="future.f3.text"></p>
+          </li>
+          <li class="step">
+            <span class="step-num">4</span>
+            <h3 data-i18n="future.f4.title"></h3>
+            <p data-i18n="future.f4.text"></p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <!-- ============ Team ============ -->
-    <section class="section" id="team">
+    <section class="section section-tint" id="team">
       <div class="container">
         <p class="kicker" data-i18n="team.kicker"></p>
         <h2 data-i18n="team.title"></h2>

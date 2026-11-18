@@ -75,7 +75,7 @@ Inspired by Zest Fresh (USA), which showed that batches harvested the same day c
 
 ## MVP features
 
-- 🧮 **Batch shelf-life calculator**: product, quality, hours before loading, outside temperature, driving hours, checkpoint (with sample presets), sun/shade, truck type → remaining days, 🔴🟡🟢 category, recommended customer, SVG chart of shelf life consumed per stage, and a "what if it had waited in the shade" comparison.
+- 🧮 **Batch shelf-life calculator**: product, quality, hours before loading, outside temperature, driving hours, hours waited at checkpoints, sun/shade, truck type → remaining days, 🔴🟡🟢 category, recommended customer, SVG chart of shelf life consumed per stage, and a "what if it had waited in the shade" comparison.
 - 📦 **FEFO batch allocation**: editable batches and customers; each batch goes to the customer with the longest storage need it can still satisfy, plus a summary of mismatches avoided.
 - 💬 **Live WhatsApp preview**: a phone mock-up showing the message for the calculator batch, updated live.
 - 🌍 **Bilingual**: Arabic (default, RTL) and English (LTR); the choice is remembered.
@@ -154,6 +154,7 @@ Key assumptions we will test:
 2. **Pilot** with 3–5 distributors, 2–3 rotating sensors and 10–20 real trips on Palestinian routes.
 3. **Trained ML model** calibrated on pilot data, with photo-based quality checks.
 4. **WhatsApp bot** delivering per-batch recommendations automatically.
+5. **Live checkpoint data:** connect to a checkpoint-status app or API (such as "ع وين رايح") so the system knows the checkpoints on each truck's route and their waiting times, and calculates the estimate automatically, with no manual input.
 
 Details: [docs/roadmap.md](docs/roadmap.md)
 

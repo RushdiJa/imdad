@@ -47,16 +47,11 @@
     fair: 0.65
   };
 
-  /**
-   * Checkpoint presets with a default waiting time in hours — SAMPLE VALUES.
-   * The user can always override the delay manually.
+  /*
+   * Checkpoint waiting time is entered directly by the user (total hours
+   * waited at checkpoints on this trip). Future plan: fill it automatically
+   * from a live checkpoint-status app/API for the truck's route.
    */
-  var CHECKPOINTS = {
-    hamra:     { delayHours: 2 },
-    tayasir:   { delayHours: 1.5 },
-    container: { delayHours: 1 },   // Container / Wadi al-Nar
-    other:     { delayHours: 1 }
-  };
 
   /**
    * Temperature offsets (°C) for the "virtual sensor".
@@ -135,7 +130,7 @@
    * @param {number} input.hoursBeforeLoading
    * @param {number} input.outsideTemp    °C
    * @param {number} input.drivingHours
-   * @param {number} input.delayHours     checkpoint waiting time
+   * @param {number} input.delayHours     total hours waited at checkpoints
    * @param {boolean} input.inSun         parked in the sun while waiting?
    * @param {'closed'|'covered'} input.truck
    * @returns {Object} result with remaining days, category, per-stage breakdown
@@ -184,7 +179,6 @@
     Q10: Q10,
     PRODUCTS: PRODUCTS,
     QUALITY: QUALITY,
-    CHECKPOINTS: CHECKPOINTS,
     OFFSETS: OFFSETS,
     THRESHOLDS: THRESHOLDS,
     rate: rate,

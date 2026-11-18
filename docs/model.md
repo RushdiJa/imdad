@@ -49,14 +49,11 @@ The result is clamped at 0 and rounded to one decimal.
 | Good | 0.85 |
 | Fair | 0.65 |
 
-### Checkpoint presets (default delay, editable)
+### Checkpoint waiting time
 
-| Checkpoint | Default delay |
-|---|---|
-| Hamra | 2 h |
-| Tayasir | 1.5 h |
-| Container / Wadi al-Nar | 1 h |
-| Other | 1 h |
+The user enters the **total hours waited at checkpoints** on the trip (default: 2 h). For reference, MAS (2025) reports an average delay of 42 minutes per checkpoint, and PNN (2025) reports waits of 1–4 hours.
+
+**Future:** this input will be filled automatically from a live checkpoint-status app or API (such as "ع وين رايح"), using the checkpoints on the truck's route.
 
 ## 3. Virtual sensor: truck temperature estimate
 
@@ -85,7 +82,7 @@ The calculator also shows a bar chart of days consumed per stage, and a **shade 
 
 ## 5. Worked example
 
-Tomato, good quality, 6 h before loading, 32 °C outside, 3 h driving, Hamra 2 h in the sun, closed truck:
+Tomato, good quality, 6 h before loading, 32 °C outside, 3 h driving, 2 h waiting at checkpoints in the sun, closed truck:
 
 | Stage | Temp | Rate | Hours | Consumed (days) |
 |---|---|---|---|---|

@@ -31,9 +31,10 @@
 - Report prediction error (days) and uncertainty per batch.
 - Distributor dashboard: all batches with estimated remaining shelf life, trip details (temperature, delay hours, checkpoints passed) and recommended destinations.
 
-## Phase 3: WhatsApp bot
+## Phase 3: WhatsApp bot and live checkpoint data
 
 - Automatic WhatsApp messages per batch: remaining life, category and recommended customer.
 - Simple replies to confirm allocation or request trip details.
 - Customer list management and FEFO allocation with capacity and route constraints.
 - Monthly report for distributors: losses avoided, returns reduced.
+- **Live checkpoint data:** connect to a checkpoint-status app or API (such as "ع وين رايح"). The system detects the checkpoints on each truck's route and their current waiting times, and calculates the remaining-shelf-life estimate by default, with no manual input from the trader.

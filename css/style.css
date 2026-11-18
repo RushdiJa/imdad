@@ -459,3 +459,12 @@ input[type="number"] { direction: ltr; text-align: start; }
   .footer-inner { grid-template-columns: 1fr auto; align-items: center; }
   .footer-note { grid-column: 1 / -1; }
 }
+
+/* ---------- Future plans ---------- */
+.field-note { margin: 2px 0 0; }
+@media (min-width: 720px) { .steps-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .steps-4 { grid-template-columns: repeat(4, 1fr); gap: 32px; } }
+.step-highlight { border-top: 3px solid var(--primary); }
+.step-highlight .step-num { color: var(--primary); }
+.step .tag { margin-bottom: 8px; }
+.nowrap { white-space: nowrap; }
